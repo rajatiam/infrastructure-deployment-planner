@@ -1,0 +1,36 @@
+{
+  "name": "Deployment Planner",
+  "kind": "planner",
+  "entity": "stack",
+  "accent": "#059669",
+  "skills": "Dependency graph modeling, topological sort, cycle detection, infrastructure planning",
+  "description": "Derive safe deployment order from infrastructure dependencies.",
+  "example": {
+    "name": "Checkout stack",
+    "graph": "{\"network\":[],\"database\":[\"network\"],\"api\":[\"database\"]}"
+  },
+  "port": 8120,
+  "fields": [
+    "name",
+    "graph"
+  ],
+  "stack": [
+    "Python",
+    "FastAPI",
+    "Angular",
+    "TypeScript",
+    "SQLite",
+    "Docker",
+    "Kubernetes",
+    "GitHub Actions"
+  ],
+  "demo_action": "plan",
+  "demo_expected": {
+    "status": "planned",
+    "order": [
+      "network",
+      "database",
+      "api"
+    ]
+  }
+}
