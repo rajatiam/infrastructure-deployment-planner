@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: 20-deployment-planner-data
+  name: infrastructure-deployment-planner-data
 spec:
   accessModes: [ReadWriteOnce]
   resources:
@@ -11,18 +11,18 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: 20-deployment-planner
+  name: infrastructure-deployment-planner
 spec:
   replicas: 1
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      app: 20-deployment-planner
+      app: infrastructure-deployment-planner
   template:
     metadata:
       labels:
-        app: 20-deployment-planner
+        app: infrastructure-deployment-planner
     spec:
       securityContext:
         runAsNonRoot: true
@@ -30,7 +30,7 @@ spec:
         fsGroup: 10001
       containers:
         - name: app
-          image: 20-deployment-planner:local
+          image: infrastructure-deployment-planner:local
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8120
@@ -60,15 +60,15 @@ spec:
       volumes:
         - name: data
           persistentVolumeClaim:
-            claimName: 20-deployment-planner-data
+            claimName: infrastructure-deployment-planner-data
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: 20-deployment-planner
+  name: infrastructure-deployment-planner
 spec:
   selector:
-    app: 20-deployment-planner
+    app: infrastructure-deployment-planner
   ports:
     - port: 80
       targetPort: 8120
